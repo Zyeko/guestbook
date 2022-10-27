@@ -17,7 +17,7 @@ package guestbook;
 
 import static org.assertj.core.api.Assertions.*;
 
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ class GuestbookRepositoryIntegrationTests {
 	@Test
 	void persistsGuestbookEntry() {
 
-		GuestbookEntry entry = repository.save(new GuestbookEntry("Yoda", "May the force be with you!"));
+		GuestbookEntry entry = repository.save(new GuestbookEntry("Yoda", "May the force be with you!","yoda@gmail.com"));
 
 		assertThat(repository.findAll()).contains(entry);
 	}
@@ -50,7 +50,7 @@ class GuestbookRepositoryIntegrationTests {
 	@Test // #34
 	void findsGuestbookEntryByAuthorName() {
 
-		GuestbookEntry entry = repository.save(new GuestbookEntry("Yoda", "May the force be with you!"));
+		GuestbookEntry entry = repository.save(new GuestbookEntry("Yoda", "May the force be with you!","yoda@gmail.com"));
 
 		assertThat(repository.findByName("Yoda", Sort.by("date"))).contains(entry);
 	}

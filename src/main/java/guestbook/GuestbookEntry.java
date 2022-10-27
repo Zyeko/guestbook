@@ -17,9 +17,9 @@ package guestbook;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 import org.springframework.util.Assert;
 
@@ -34,22 +34,26 @@ import org.springframework.util.Assert;
 class GuestbookEntry {
 
 	private @Id @GeneratedValue Long id;
-	private final String name, text;
+	private final String name, text, ead;
 	private final LocalDateTime date;
+	
 
 	/**
-	 * Creates a new {@link GuestbookEntry} for the given name and text.
+	 * Creates a new {@link GuestbookEntry} for the given name, text and E-Mail Address.
 	 *
 	 * @param name must not be {@literal null} or empty
 	 * @param text must not be {@literal null} or empty
+	 * @param ead must not be {@literal null} or empty
 	 */
-	public GuestbookEntry(String name, String text) {
+	public GuestbookEntry(String name, String text, String ead) {
 
 		Assert.hasText(name, "Name must not be null or empty!");
 		Assert.hasText(text, "Text must not be null or empty!");
+		Assert.hasText(ead, "EMail-Address must not be null or empty!");
 
 		this.name = name;
 		this.text = text;
+		this.ead  = ead;
 		this.date = LocalDateTime.now();
 	}
 
@@ -57,13 +61,14 @@ class GuestbookEntry {
 	private GuestbookEntry() {
 		this.name = null;
 		this.text = null;
+		this.ead  = null;
 		this.date = null;
 	}
 
 	public String getName() {
 		return name;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -74,5 +79,9 @@ class GuestbookEntry {
 
 	public String getText() {
 		return text;
+	}
+	
+	public String getEad() {
+		return ead;
 	}
 }
